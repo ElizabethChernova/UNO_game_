@@ -1,0 +1,14 @@
+#game-board {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#deck, #discard-pile, #player-1-hand, #player-2-hand {
+    width: 200px;
+    height: 300px;
+    border: 1px solid black;
+    margin: 20px;
+    text-align: center;
+}
