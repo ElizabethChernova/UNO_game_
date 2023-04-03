@@ -21,6 +21,8 @@ deal_cards(Deck, [Hand1, Hand2], DrawPile) :-
     Hand2 = hand(Hand2Cards),
     DrawPile = draw_pile(DrawPileCards).
 
+nextPlayer(NextPlayer, [NextPlayer,Player2], Player2).
+nextPlayer(NextPlayer, [Player1,NextPlayer], Player1).
 
     
 color(red).
