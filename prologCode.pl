@@ -7,6 +7,22 @@ shuffle(List, Shuffled) :-
     length(List, Length),
     random_permutation(List, Shuffled),
     length(Shuffled, Length).
+    
+% Deal cards to players
+dealCards([], _, _, []).
+dealCards([Player|Players], Cards, N, [PlayerCards|PlayerHands]) :-
+    length(PlayerCards, N),
+    append(PlayerCards, RestCards, Cards),
+    dealCards(Players, RestCards, N, PlayerHands).
+% Deal cards to players
+deal_cards(Deck, [Hand1, Hand2], DrawPile) :-
+    split_deck(Deck, Hand1Cards, Hand2Cards, DrawPileCards),
+    Hand1 = hand(Hand1Cards),
+    Hand2 = hand(Hand2Cards),
+    DrawPile = draw_pile(DrawPileCards).
+
+
+    
 color(red).
 color(yellow).
 color(green).
