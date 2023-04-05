@@ -46,14 +46,20 @@ dealCards([Player|Players], Cards, N, [PlayerCards|PlayerHands]) :-
     length(PlayerCards, N),
     append(PlayerCards, RestCards, Cards),
     dealCards(Players, RestCards, N, PlayerHands).
-% Deal cards to players
-deal_cards(Deck, [Hand1, Hand2], DrawPile) :-
-    split_deck(Deck, Hand1Cards, Hand2Cards, DrawPileCards),
-    Hand1 = hand(Hand1Cards),
-    Hand2 = hand(Hand2Cards),
-    DrawPile = draw_pile(DrawPileCards).
+removeCard(Card, [Card|Rest], Rest).
+removeCard(Card, [Other|Rest], [Other|NewRest]) :- 
+    removeCard(Card, Rest, NewRest).
+matches(card(c1,c11), card(c2, c22)) :- 
+    c1=c2, c11=c22.
+addToDiscardPile(Card, DiscardPile, [Card|DiscardPile]).
+isWild(Card) :- 
+    Card = card(_,wild);Card= card(_,wild_draw4).
+setTopCard(TopCard, DiscardPile, [TopCard|Rest]) :- 
+    removeCard(TopCard, DiscardPile, Rest).
+isEmpty([]).
+setWinner(Player1, _, Player2, Player1) :- 
+    isEmpty(Player2).
+setWinner(_, _, Player2, Player2).
 
-
-
-
-
+evaluateCard((card(a,b)), CurrentPlayer, (card(topa,topb)), Value) :-
+        true.
